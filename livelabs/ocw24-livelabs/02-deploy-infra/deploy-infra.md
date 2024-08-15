@@ -1,4 +1,4 @@
-# Start your first Pulumi stack and deploy infrastructure
+# Start your first Pulumi stack and deploy Backstage
 
 ## Introduction
 
@@ -147,100 +147,46 @@ Estimated time: 20 minutes
     <copy>pulumi up</copy>
     ```
 
-4. 
-
-## Task 3: Get to know your OKE cluster
-
-Now that Kubernetes is up and running, interacting with the cluster is pretty much the same as if you were running Kubernetes on your own equipment. Let's take a look at some of the resources that get created as part of the initial setup.
-
-1. First and foremost, what do we know about our new OKE cluster? Type `kubectl cluster-info` to find out!
-
-2. Take a look at the default set of namespaces with `kubectl get namespaces`. You should see *default*, *kube-node-lease*, *kube-public*, and *kube-system*.
-
-3. Check to see which pods are running across all namespaces with `kubectl get pods -o wide -A`. You should see the likes of coredns, flannel, kube-proxy, and more.
-
-4. Are there any ingress resources defined? Try `kubectl get ingress -A` - the results should be empty as we've not yet deployed an ingress controller or defined any ingress resources.  
-
-5. Minimize (but do not exit) Cloud Shell.
-
-## Task 4: Create a Container Registry Repo
-
-The OCI Container Registry (OCIR) is a secure, Dockerhub-compliant service that enables you to store and manage your container iamges securely, within the confines of OCI. 
-
-<details><summary><b>Prefer to work with the CLI?</b></summary>
-
-The instructions below will take you through creating a new repo via the Web UI. If you'd prefer to create the repo using the OCI CLI, you may remain in Cloud Shell and run this command (make sure to adjust the parameter value to reflect your own compartment OCID).
+4. Pulumi will evaluate the contents of the stack, show a preview, and prompt for confirmation before creating anything.
 
     ```bash
-    <copy>
-	oci artifacts container repository create --compartment-id ocid1.compartment.oc1..aaaaaaaace...... --display-name okeapprepo
-    </copy>
+    Previewing update (pulumi-stack)
+
+    View in Browser (Ctrl+O): https://app.pulumi.com/elischilling/00-backstage/pulumi-stack/previews/fd611c60-57a0-4ae8-a157-faddc811a8e7
+
+        Type                                      Name                          Plan
+    +   pulumi:pulumi:Stack                       00-backstage-pulumi-stack     create
+    +   ├─ command:local:Command                  backstageBuild                create
+    +   ├─ oci:Core:Vcn                           backstageVcn                  create
+    +   ├─ oci:Artifacts:ContainerRepository      backstageContainerRepository  create
+    +   ├─ oci:Core:InternetGateway               backstageInternetGateway      create
+    +   ├─ oci:Core:SecurityList                  backstageSecurityList         create
+    +   ├─ oci:Core:RouteTable                    backstageRouteTable           create
+    +   ├─ oci:Core:Subnet                        backstageSubnet               create
+    +   ├─ docker:index:Image                     backstageImage                create
+    +   └─ oci:ContainerEngine:ContainerInstance  backstageContainerInstance    create
+
+    Outputs:
+        backstageUrl: output<string>
+        image       : output<string>
+
+    Resources:
+        + 10 to create
+
+    Do you want to perform this update? 
     ```
 
----
-</details>
-
-1. Navigate to **`Developer Services`** -> **`Container Registry`**
-
-2. Click **Create repository**
-
-3. Provide a name for your repo and ensure it is set to **Private** access.
-
-    ![Create new repo](images/create-repo.png)
-
-4. Click **`[Create]`**
-
-## Task 5: Register a secret in Kubernetes
-
-1. First things first - you'll need to locate the region key for your selected region. This will be used to connect to the apprpriate Container Registry Endpoint. Return to Cloud Shell and enter the following command:
-
-    ```bash
-    <copy>
-    oci iam region list --query 'data[?name == `us-phoenix-1`].key'
-    </copy>
-    ```
-
-    >NOTE: if not using Phoenix, replace the region name with that which you've selected for the workshop.
-
-2. Your Container Register endpoint will thus be the **key** plus `.ocir.io`. *i.e.* `phx.ocir.io`
-
-3. For this next command you'll need to retrieve your Auth token which was created in the first lab. Construct the following command, making sure to input your own details:
-
-    ```bash
-    <copy>
-    kubectl create secret docker-registry ocirsecret --docker-server='container registry endpoint' --docker-username='complete username' --docker-password='auth token' --docker-email='your email address'
-    </copy>
-    ```
-    
-    * container registry endpoint = i.e. phx.ocir.io
-    * complete username = `<tenancy namespace>/<username or email address>`
-        *i.e. abc123dev456/eli.schilling@oracle.com*
-    * auth token = the value of the token created in lab 1
-
-4. Validate that the secret was created successfully:
-
-    ```
-    <copy>
-    kubectl get secrets
-    <copy>
-    ```
-
-    ```
-    user123@cloudshell:~ (us-phoenix-1)$ kubectl get secrets
-    NAME         TYPE                             DATA   AGE
-    ocirsecret   kubernetes.io/dockerconfigjson   1       3m
-    ```
-
+5. Use the up arrow on your keyboard to select `Yes` and press enter. The resources will be provisioned. When it has finished, you should see a `backstageUrl` in the **Outputs:** section. Copy and paste that into your browser.
 
 You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [Oracle Container Engine for Kubernetes (OKE)](https://www.oracle.com/cloud/cloud-native/container-engine-kubernetes/)
+* [Backstage open source project](https://backstage.io/)
 
 
 ## Acknowledgements
 
-* **Author** - 
+* **Author** - Eli Schilling - Technical Architect
 * **Contributors** -
-* **Last Updated By/Date** -
+* **Last Updated By/Date** - August, 2024

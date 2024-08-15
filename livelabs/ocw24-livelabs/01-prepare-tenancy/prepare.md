@@ -143,10 +143,10 @@ To simplify the remaining steps in the workshop, we recommend using an OCI comup
     sudo usermod -aG docker ubuntu
     bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
     curl -fsSL https://get.pulumi.com | sh
-    exec -l $SHELL
     sudo apt install -y nodejs
     sudo apt install gcc g++ make -y
     sudo npm install --global yarn
+    exec -l $SHELL
     </copy>
     ```
 
