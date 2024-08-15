@@ -31,6 +31,7 @@ resources:
 
   backstageCompartment:
     properties:
+      compartment_id: ${compartment_ocid}
       description: "Compartment for Backstage"
       enableDelete: true
       name: backstage-compartment
