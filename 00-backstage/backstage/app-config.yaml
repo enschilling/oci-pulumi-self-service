@@ -84,6 +84,6 @@ catalog:
     - allow: [Component, System, API, Resource, Location,Template,User,Group]
   locations:
     - type: url
-      target: https://github.com/my-backstage-demo/backstage-pulumi-templates/blob/main/oci-static-page/template.yaml
+      target: https://github.com/enschilling/oci-pulumi-self-service/blob/main/00-backstage/templates/oci-static-page/template.yaml
       rules:
       - allow: [Template]

@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: oci-static-website
-  title: Create a new OCI Static Website
+  title: Create a new Static Website on OCI
   description: |
     This template creates a new OCI Static Website using Pulumi.
   tags:
