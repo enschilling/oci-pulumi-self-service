@@ -178,6 +178,8 @@ Estimated time: 20 minutes
 
 5. Use the up arrow on your keyboard to select `Yes` and press enter. The resources will be provisioned. When it has finished, you should see a `backstageUrl` in the **Outputs:** section. Copy and paste that into your browser.
 
+    ![View the Backstage dashboard](images/backstage-dashboard.png)
+
 You may now **proceed to the next lab**.
 
 ## Learn More

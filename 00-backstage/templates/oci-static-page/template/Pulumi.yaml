@@ -21,7 +21,7 @@ resources:
       contentType: "text/html"
 
 variables:
-  compartmentId: ocid1.compartment.oc1..aaaaaaaavt4axn32mx65ryw7cnnh6hctn3rwosbrudrovfpdah5diluehb5a
+  compartmentId: ${compartment_ocid}
   namespace:
     fn::oci:ObjectStorage/getNamespace:getNamespace:
 

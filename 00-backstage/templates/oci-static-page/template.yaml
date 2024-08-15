@@ -53,8 +53,8 @@ spec:
         title: Pulumi ESC
         type: string
         enum:
-        - oracle-backstage-demo
-        default: oracle-backstage-demo
+        - oci-pulumi-self-service
+        default: oci-pulumi-self-service
         description: |
           The Pulumi ESC to use for the Pulumi project
       stack:
