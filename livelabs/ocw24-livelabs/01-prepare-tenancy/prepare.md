@@ -12,6 +12,7 @@ Estimated time: 15 minutes
 * Create new Compartment
 * Create an API Signing Key
 * Sign up for a free Pulumi account
+* Create a compute instance
 
 
 ## Task 1: Create a new compartment for the workshop
@@ -26,11 +27,11 @@ Estimated time: 15 minutes
 
 4. Once the Compartment in task 2 has been created, it will appear in the list of compartments.
 
-5. Locate the **OCID** column for the compartment you just created. Hover over the partially displayed OCID and click the *Copy* link.  Store the value in a text file for later use.
+5. Locate the **OCID** column for the compartment you just created. Hover over the partially displayed OCID and click the <ins>Copy</ins> link.  Store the value in a text file for later use.
 
     ![Copy compartment OCID](images/compartment-ocid.png)
 
-## Task 2: Create an API key
+## Task 2: Create an Auth token and collect info
 
 1. Click the profile avatar in the top right corner of the console and select **My profile**
 
@@ -38,21 +39,31 @@ Estimated time: 15 minutes
 
 2. Scroll down to the **Resources** Menu on the left side and view the available options. This is where you would create API Keys (for CLI, Terraform, SDK access) and Auth Tokens (i.e. access to OCI Container Registry).
 
-3. Click **API keys**
+3. Click **Auth tokens**
 
-4. Click **`[Add API key]`** and then click **`[Download private key]`**. 
+4. Click **`[Generate token]`**, provide a description (i.e. *oci-pulumi-workshop*), and click **`[Generate token]`** once more.
 
-5. Make note of where the file was saved, you will need to retrieve the contents in a later step. Click **`[Add]`** to safe the key and close the dialog box.
+5. The generated token will be displayed. Click the <ins>Copy</ins> link and paste the value into a text file for use later.
 
-    >Note: If you do not download the key before clicking the Add button, you will not be able to go back and retrieve the key.
+    ![Generated token dialog box](images/generated-token.png)
 
-## Task 3: Retrieve the Object storage namespace for your tenancy
+    >Note: As the dialog says, if you don't save it now, you won't be able to see the token after closing the window.
+
+6. Scroll back to the top of the page and locate the **OCID:** for your user account. Click the <ins>Copy</ins> link and safe it in a safe place.
+
+7. Copy the value **Username** value and store it.
+
+    >Note: For IAM users, you'll likely see an e-mail address or simple name. For OIDC users, it will be `oracleidentitycloudservice/<name or email>`.
+
+## Task 3: Retrieve the Object storage namespace and OCID for your tenancy
 
 1. Click the profile avatar in the top right corner once again and select **Tenancy: <your tenancy name>**
 
 2. Locate the **Object storage namespace** item and copy the value. Store this 12-digit string in a safe place...you'll need it later.
 
     ![Tenancy object storage namespace](images/tenancy-namespace.png)
+
+3. Click the <ins>Copy</ins> link to the right of **OCID:** just above the namespace. Store that value for later.
 
 ## Task 4: Sign up for a free Pulumi account
 
@@ -72,7 +83,148 @@ Estimated time: 15 minutes
 
     ![Pulumi - viewing the dashboard](images/pulumi-signup-03.png)
 
-6. You can minimze the Pulumi dashboard for now. We'll come back to it in a future lab.
+6. From the Pulumi dashboard, click your account menu button in the top right corner and select ** Personal access tokens**.
+
+    ![Account menu - Pulumi dashboard](images/pulumi-create-pat-01.png)
+
+7. Click the **`[Create token]`** button. Provide a description and select an expiration period (30 days should suffice for the workshop).
+
+    ![Create personal access token](images/pulumi-create-pat-02.png)
+
+8. Click **`[Create token]`**.
+
+9. Copy the new personal access token to a safe place to be used later in the wrokshop.
+
+10. You can minimze the Pulumi dashboard for now. We'll come back to it in a future lab.
+
+## Task 5: Launch an OCI Compute Instance (optional)
+To simplify the remaining steps in the workshop, we recommend using an OCI comupute instance. If you'd prefer to run the tasks locally on your laptop, you will need:
+* Python 3.8 or newer
+* Node.js 18 or newer
+* Yarn, g++, gcc, and make
+* Docker
+* Git
+* Pulumi
+* OCI CLI
+
+1. Create the instance and VCN
+
+    * Use the console menu to navigate to **`Compute`** -> **`Instances`** and click **`[Create instance]`**.
+    * Provide an instance name (e.g. oci-pulumi-workshop)
+    * Change image shape and select `Canonical Ubuntu 22.04`
+    * Under **Primary VNIC Information** select the radio button to *Create new virtual cloud network*
+    * Under **Add SSH keys** you can either click **`[Save private key]`** to retrieve a new SSH key, or you can click one of the radio buttons to upload or paste your existing key.
+    * At the bottom of the page, click **`[Create]`**
+
+3. Locate the public IP address of the instance when available.
+
+2. SSH into the instance using your favorite SSH client.
+
+    ```bash
+    <copy>ssh -i <rivate key path> ubuntu@<public ip address></copy>
+    ```
+
+    >Note: If you use Putty, you'll need to use `puttygen` to convert the private key from PEM format to PPK.
+
+3. Install pre-requisites.
+
+    ```bash
+    <copy>
+    sudo apt install apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+    NODE_MAJOR=20
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+    sudo apt install -y ca-certificates curl gnupg
+    sudo apt update
+    sudo apt install docker-ce -y
+    sudo usermod -aG docker ubuntu
+    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+    exec -l $SHELL
+    sudo apt install -y nodejs
+    sudo apt install gcc g++ make -y
+    </copy>
+    ```
+
+    >Note: You can copy the entire block of commands and paste it in your terminal. You might be prompted a few times to press enter to accept the defaults, or type `Y` to agree.
+
+4. Configure the OCI CLI.
+
+    ```bash
+    <copy>oci setup config</copy>
+    ```
+
+    >Note: You will be prompted to enter the User OCID, Tenancy OCID, and region. You'll also be prompted to create a new API key, which is recommended.
+
+    **Example**
+
+    ```bash
+    Enter a location for your config [/home/ubuntu/.oci/config]:
+    Enter a user OCID: ocid1.user.oc1..axxxxxxxma
+    Enter a tenancy OCID: ocid1.tenancy.oc1..aaxxxxxza
+    Enter a region by index or name(e.g.
+    1: af-johannesburg-1, 2: ap-chiyoda-1, 3: ap-chuncheon-1, 4: ap-dcc-canberra-1, 5: ap-dcc-gazipur-1,
+    ===truncated===
+    66: us-sanjose-1): us-ashburn-1
+    Do you want to generate a new API Signing RSA key pair? (If you decline you will be asked to supply the path to an existing key.) [Y/n]: Y
+    Enter a directory for your keys to be created [/home/ubuntu/.oci]:
+    Enter a name for your key [oci_api_key]:
+    Public key written to: /home/ubuntu/.oci/oci_api_key_public.pem
+    Enter a passphrase for your private key ("N/A" for no passphrase):
+    Repeat for confirmation:
+    Private key written to: /home/ubuntu/.oci/oci_api_key.pem
+    Fingerprint: 3a:b-redacted-c:bc
+    Config written to /home/ubuntu/.oci/config
+
+
+    If you haven't already uploaded your API Signing public key through the
+    console, follow the instructions on the page linked below in the section
+    'How to upload the public key':
+
+        https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2
+    ```
+
+5. After the CLI setup is complete, you will need to add the API key to your OCI user profile. [Click here](https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2) to read the instructions.
+
+    ```bash
+    <copy>
+    cat ~/.oci/oci_api_key_public.pem
+    </copy>
+    ```
+
+6. Test the CLI.
+
+    ```bash
+    <copy>
+    oci iam availability-domain list
+    </copy>
+    ```
+
+    The output should look something like:
+    ```bash
+    {
+    "data": [
+        {
+        "compartment-id": "ocid1.tenancy.oc1..aaaaaaaa2=======5za",
+        "id": "ocid1.availabilitydomain.oc1..aaaaaaaat========7mxsfdq",
+        "name": "aaaa:US-ASHBURN-AD-1"
+        },
+        {
+        "compartment-id": "ocid1.tenancy.oc1..aaaaaa======5za",
+        "id": "ocid1.availabilitydomain.oc1..aaaaaaaa=====l2n3a",
+        "name": "aaaa:US-ASHBURN-AD-2"
+        },
+        {
+        "compartment-id": "ocid1.tenancy.oc1..aaaaaaa=======4xlrz5za",
+        "id": "ocid1.availabilitydomain.oc1..aaaaaaaau======hta",
+        "name": "aaaa:US-ASHBURN-AD-3"
+        }
+    ]
+    }
+    ```
+
 
 You may now **proceed to the next lab**.
 
