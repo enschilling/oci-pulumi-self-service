@@ -12,40 +12,142 @@ Estimated time: 20 minutes
 * Access the Backstage portal
 * Create a new environment in Pulumi
 
-## Task 1: Set up Pulumi in Cloud Shell
+## Task 1: Download the code and confnigure Pulumi
 
-1. Open Cloud Shell
-
-    ![cloud shell](images/cloud-shell.png)
-
-2. Create a new directory in which to complete the workshop tasks.
-
-    ```bash
-    <copy>mkdir pulumi && cd pulumi</copy>
-    ```
-
-3. Clone the source code repository.
-
-    ```bash
-    <copy>git clone todo:add_url && cd oci-pulumi-resources/00-backstage</copy>
-    ```
-
-4. Create a new virtual environment with Python. This will allow the flexibility to install the requisite Pulumi binaries.
+1. Within your lab environment (Compute instance or local machine), clone the source code repository.
 
     ```bash
     <copy>
-    python -m venv venv/
-    source venv/bin/activate
+    git clone https://github.com/enschilling/oci-pulumi-self-service.git
+    cd oci-pulumi-self-service/livelabs/ocw24-livelabs/99-resources/00-backstage/
     </copy>
     ```
 
-    The the shell prompt should now have the prefix `(venv)`. To exit the virtual environment, type `deactivate` and press enter.
+2. Confirm Pulumi installed successfully.
 
-    >Note: If you exit or restarte Cloud Shell, you will need to return to the workshop folder and issue the source command again.
+    ```bash
+    <copy>pulumi --help</copy>
+    ```
+
+    **Output should look something like...**
+
+    ```bash
+    Pulumi - Modern Infrastructure as Code
+
+    To begin working with Pulumi, run the `pulumi new` command:
+
+        $ pulumi new
+
+    This will prompt you to create a new project for your cloud and language of choice.
+
+    The most common commands from there are:
+
+        - pulumi up       : Deploy code and/or resource changes
+        - pulumi stack    : Manage instances of your project
+        - pulumi config   : Alter your stack"'"s configuration or secrets
+        - pulumi destroy  : Tear down your stack"'"s resources entirely
+
+    For more information, please visit the project page: https://www.pulumi.com/docs/
+    ```
+
+## Create a Python virtual environment and install the Pulumi OCI provider
+
+1. Create a new Python virtual environment with Python 3.10
+
+    ```bash
+    <copy>
+    python3.10 -m venv venv
+    source venv/bin/activate
+    <copy>
+    ```
+
+    You should now see `(venv)` at the beginning of of your terminal prompt.
+
+2. Install the Pulumi OCI provider
+
+    ```bash
+    <copy>
+    pip install pulumi_oci
+    </copy>
+    ```
+
+3. Create your first Pulumi stack.
+
+    ```bash
+    <copy>
+    pulumi config
+    </copy>
+    ```
+
+    Whem prompted to log in, paste your Pulumi Personal Access Token that you created in lab 1. You will then be prompted:
+
+    ```bash
+    (venv) ubuntu@instance:~/oci-pulumi-self-service/livelabs/ocw24-livelabs/99-resources/00-backstage$ pulumi config
+    Manage your Pulumi stacks by logging in.
+    Run `pulumi login --help` for alternative login options.
+    Enter your access token from https://app.pulumi.com/account/tokens
+        or hit <ENTER> to log in using your browser                   : *********************************
 
 
+    Welcome to Pulumi!
 
-    
+    Pulumi helps you create, deploy, and manage infrastructure on any cloud using
+    your favorite language. You can get started today with Pulumi at:
+
+        https://www.pulumi.com/docs/get-started/
+
+    Tip: Resources you create with Pulumi are given unique names (a randomly
+    generated suffix) by default. To learn more about auto-naming or customizing resource
+    names see https://www.pulumi.com/docs/intro/concepts/resources/#autonaming.
+
+
+    Please choose a stack, or create a new one:  [Use arrows to move, type to filter]
+    > <create a new stack>
+    ```
+
+4. Provide a name the stack and press enter.
+
+## Task 2: Build out your Pulumi project
+
+1. Now that you have a Pulumi stack, you'll need to provide some environment configuration details. Copy the commands below to a text file and replace the `<placeholder>` values with the data you gathered in lab 1.
+
+    ```bash
+    <copy>
+    pulumi config set oci:region <chosen region>
+    pulumi config set username <your usernam> # for the Oracle Container Registry
+    pulumi config set auth-token <your auth token> --secret # for the Oracle Container Registry
+    pulumi config set github-token <your github PAT> --secret 
+    pulumi config set pulumi-pat <your Pulumi personal access token> --secret
+    pulumi config set compartment_ocid <your compartment OCID>
+    pulumi config set tenancy_ocid <your tenancy OCID>
+    </copy>
+    ```
+
+2. Double check to ensure all the values were stored properly.
+
+    ```bash
+    <copy>pulumi config</copy>
+    ```
+
+    Output should look like this. Notice how the value of the secrets is not displayed:
+
+    ```bash
+    KEY               VALUE
+    auth-token        [secret]
+    pulumi-pat        [secret]
+    github-token      [secret]
+    compartment_ocid  ocid1.compartment.oc1..aa00000000000000000000000000000000000000000000006a
+    tenancy_ocid      ocid1.tenancy.oc1.aa999999999999999999999999999999999999999999999b
+    username          el123456g@domain.com
+    oci:region        us-ashburn-1
+
+3. Bring the Pulumi project online.
+
+    ```bash
+    <copy>pulumi up</copy>
+    ```
+
+4. 
 
 ## Task 3: Get to know your OKE cluster
 

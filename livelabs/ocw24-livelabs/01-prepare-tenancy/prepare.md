@@ -2,9 +2,9 @@
 
 ## Introduction
 
-For this workshop you'll make use of the OCI Console, Cloud Shell, and the Pulumi app service. Here, we'll walk through all the tasks necessary to set up and obtain resources that will be used throughout the workshop. 
+In this workshop you'll build out a working environment that you can use to deploy and manage the Pulumi and Backstage envrironment. You'll need to be logged in your OCI tenancy (Free Trial recommended). You'll also need an SSH client so you can connect to an OCI Compute Instance.
 
-Estimated time: 15 minutes
+Estimated time: 20 minutes
 
 ### Objectives
 
@@ -142,9 +142,11 @@ To simplify the remaining steps in the workshop, we recommend using an OCI comup
     sudo apt install docker-ce -y
     sudo usermod -aG docker ubuntu
     bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
+    curl -fsSL https://get.pulumi.com | sh
     exec -l $SHELL
     sudo apt install -y nodejs
     sudo apt install gcc g++ make -y
+    sudo npm install --global yarn
     </copy>
     ```
 
