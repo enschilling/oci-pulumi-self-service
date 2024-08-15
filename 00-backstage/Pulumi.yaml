@@ -29,18 +29,10 @@ resources:
         password: ${auth-token}
     type: docker:Image
 
-  backstageCompartment:
-    properties:
-      compartment_id: ${compartment_ocid}
-      description: "Compartment for Backstage"
-      enableDelete: true
-      name: backstage-compartment
-    type: oci:Identity:Compartment
-
   backstageVcn:
     type: oci:Core:Vcn
     properties:
-      compartmentId: ${backstageCompartment.id}
+      compartmentId: ${compartment_ocid}
       cidrBlock: "10.0.0.0/16"
       displayName: "Backstage VCN"
       dnsLabel: "backstage"
@@ -48,14 +40,14 @@ resources:
   backstageContainerRepository:
     type: oci:Artifacts:ContainerRepository
     properties:
-      compartmentId: ${backstageCompartment.id}
+      compartmentId: ${compartment_ocid}
       displayName: "backstage"
       isPublic: true
 
   backstageSecurityList:
     type: oci:Core:SecurityList
     properties:
-      compartmentId: ${backstageCompartment.id}
+      compartmentId: ${compartment_ocid}
       vcnId: ${backstageVcn.id}
       displayName: "backstage-security-list"
       ingressSecurityRules:
@@ -78,7 +70,7 @@ resources:
     type: oci:Core:Subnet
     properties:
       cidrBlock: "10.0.0.0/24"
-      compartmentId: ${backstageCompartment.id}
+      compartmentId: ${compartment_ocid}
       vcnId: ${backstageVcn.id}
       displayName: "backstage-subnet"
       dnsLabel: "containers"
@@ -89,7 +81,7 @@ resources:
   backstageInternetGateway:
     type: oci:Core:InternetGateway
     properties:
-      compartmentId: ${backstageCompartment.id}
+      compartmentId: ${compartment_ocid}
       vcnId: ${backstageVcn.id}
       displayName: "backstage-internet-gateway"
       enabled: true
@@ -97,7 +89,7 @@ resources:
   backstageRouteTable:
     type: oci:Core:RouteTable
     properties:
-      compartmentId: ${backstageCompartment.id}
+      compartmentId: ${compartment_ocid}
       vcnId: ${backstageVcn.id}
       displayName: "backstage-route-table"
       routeRules:
@@ -108,7 +100,7 @@ resources:
     type: oci:ContainerEngine:ContainerInstance
     properties:
       availabilityDomain: ${backstageAvailabilityDomains.availabilityDomains[0].name}
-      compartmentId: ${backstageCompartment.id}
+      compartmentId: ${compartment_ocid}
       displayName: "backstage-container-instance"
       containerRestartPolicy: "ALWAYS"
       shape: "CI.Standard.E4.Flex"
@@ -141,7 +133,7 @@ outputs:
 variables:
   backstageAvailabilityDomains:
     fn::oci:Identity/getAvailabilityDomains:getAvailabilityDomains:
-      compartmentId: ${backstageCompartment.compartmentId}
+      compartmentId: ${tenancy_ocid}
 
   backstageContainerInstancePublicIp:
     fn::oci:Core/getVnic:getVnic:
