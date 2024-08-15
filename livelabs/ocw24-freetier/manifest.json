@@ -1,11 +1,11 @@
 {
-  "workshoptitle": "A Deep Dive Into Kubernetes using OKE - From Zero to Day 2 Operations",
-  "help": "eli.schilling@oracle.com,chiping.hwang@oracle.com",
+  "workshoptitle": "Build a Self-Service Infrastructure-as-Code Platform for OCI Using Pulumi",
+  "help": "eli.schilling@oracle.com",
   "tutorials": [
     {
       "title": "Introduction",
       "description": "Introduction to the Workshop",
-      "filename": "../ocw23-livelabs/00-intro/intro.md"
+      "filename": "../ocw24-livelabs/00-intro/intro.md"
     },
     {
       "title": "Get Started",
@@ -13,64 +13,29 @@
       "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"
     },
     {
-      "title": "Lab 1: Prepare your tenancy",
-      "description": "Confirm resource availability, get to know Cloud Shell, and provision an auth token",
-      "filename": "../ocw23-livelabs/01-prepare-tenancy/prepare.md"
+      "title": "Lab 1: Prepare your workshop",
+      "description": "Log into your tenancy, access Cloud Shell, retrieve lab contents, and sign up for a free Pulumi account",
+      "filename": "../ocw24-livelabs/01-prepare-tenancy/prepare.md"
     },
     {
-      "title": "Lab 2: Deploying Infrastructure / OKE",
-      "description": "Use Terraform with Resource Manager to deploy OKE and requisite network resources",
-      "filename": "../ocw23-livelabs/02-deploy-infra/deploy-infra.md"
+      "title": "Lab 2: Deploying Infrastructure with Pulumi",
+      "description": "Use Pulumi to create the Backstage working environment",
+      "filename": "../ocw24-livelabs/02-deploy-infra/deploy-infra.md"
     },
     {
-      "title": "Lab 3: Deploy Apps plus Ingress Controller",
-      "description": "Deploy the sample applications and the NGINX ingress controller",
-      "filename": "../ocw23-livelabs/03-deploy-app/deploy-app.md"
+      "title": "Lab 3: Create your first Backstage template",
+      "description": "Create a template for provisioning an OCI Object Storage bucket",
+      "filename": "../ocw24-livelabs/03-first-template/first-template.md"
     },
     {
-      "title": "Lab 4: Working with Virtual Nodes",
-      "description" : "Deploying and managing an OKE cluster with Virtual Nodes",
-      "filename":"../ocw23-livelabs/04-virtual-nodes/virtual-nodes.md"
-    },
-    {
-      "title": "Lab 5: Operational Best Practices - Overview",
-      "description" : "Review some of the key capabilities, such as taints & tolerations, pod scaling, resource limits, and more",
-      "filename":"../ocw23-livelabs/05-operations/operations-overview.md"
-    },
-    {
-      "title": "Lab 5a: Ops - Horizontal Pod Auto Scaling",
-      "description" : "Setting up and enacting horizontal pod auto scaling",
-      "filename":"../ocw23-livelabs/05-operations/operations-hpa.md"
-    },
-    {
-      "title": "Lab 5b: Ops - Kubernetes Cluster Auto Scaling",
-      "description" : "Setting up and enacting cluster auto scaling for node pools",
-      "filename":"../ocw23-livelabs/05-operations/operations-cluster-autoscale.md"
-    },
-    {
-      "title": "Lab 6: Security and Observability of Kubernetes with OKE",
-      "description" : "Leveraging built-in and 3rd party tools to monitor resources and enforce security best practices",
-      "filename":"../ocw23-livelabs/06-security-observability/security-observability.md"
-    },
-    {
-      "title": "Lab 6a: Security Controls with Neuvector and Sigstore",
-      "description" : "Leverage open source tools to implement zero trust and apply governance to your Kubernetes environment.",
-      "filename":"../ocw23-livelabs/06-security-observability/sec-controls.md"
-    },
-    {
-      "title": "Lab 6b: Encrypting Volumes with Customer Managed Keys",
-      "description" : "Utilize cutsomer-managed keys and OCI vault for data encryption of dynamically provisioned volumes.",
-      "filename":"../ocw23-livelabs/06-security-observability/sec-data_encryption.md"
-    },
-    {
-      "title": "Lab 7: Automating OKE App Deployment with OCI DevOps",
-      "description" : "Streamlining app build and delivery with OCI DevOps service",
-      "filename":"../ocw23-livelabs/07-devops/devops.md"
+      "title": "Lab 4: Experiment with additional, more complex templates",
+      "description" : "Create another Backstage template for provisioning an Oracle Container Engine for Kubernetes (OKE) cluster",
+      "filename":"../ocw24-livelabs/04-oke-template.md"
     },
     {
       "title": "Lab 8: Cleaning up your tenancy",
       "description" : "Clean-up and remove all deployed resources",
-      "filename":"../ocw23-livelabs/08-cleanup/cleanup.md"
+      "filename":"../ocw24-livelabs/08-cleanup/cleanup.md"
     },
     {
       "title": "Need Help?",
