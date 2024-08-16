@@ -61,9 +61,9 @@ spec:
         title: Select stack
         type: string
         enum:
-        - dev
-        - staging
-        - prod
+        - 00-backstage
+        - 00-backstage
+        - 00-backstage
         enumNames:
         - Development
         - Staging
