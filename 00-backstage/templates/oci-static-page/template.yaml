@@ -62,12 +62,8 @@ spec:
         type: string
         enum:
         - 00-backstage
-        - 00-backstage
-        - 00-backstage
         enumNames:
         - Development
-        - Staging
-        - Production
         description: The pulumi stack to use
       content:
         title: Website Content
