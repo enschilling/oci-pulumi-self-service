@@ -18,6 +18,7 @@ spec:
     required:
     - name
     - owner
+    - compartmentId
     properties:
       name:
         title: Name
@@ -37,6 +38,10 @@ spec:
         ui:options:
           catalogFilter:
           - kind: Group,User
+      compartmentId:
+        title: Compartment OCID
+        type: string
+        description: Define where you would like the resources to be created.
 
   - title: Configure Pulumi template
     required:
@@ -102,6 +107,7 @@ spec:
         system: ${{ parameters.system }}
         esc: ${{parameters.esc}}
         content: ${{parameters.content}}
+        compartment_ocid: $${{parameters.compartmentId }}
 
   - id: wait
     name: Wait for template to be fetched
