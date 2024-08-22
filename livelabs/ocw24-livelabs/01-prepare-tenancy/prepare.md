@@ -12,6 +12,7 @@ Estimated time: 20 minutes
 * Create new Compartment
 * Create an API Signing Key
 * Sign up for a free Pulumi account
+* Generate a GitHub personal access token
 * Create a compute instance
 
 
@@ -97,7 +98,15 @@ Estimated time: 20 minutes
 
 10. You can minimze the Pulumi dashboard for now. We'll come back to it in a future lab.
 
-## Task 5: Launch an OCI Compute Instance (optional)
+## Task 5: Generate a Github.com Personal Access Token (PAT)
+
+1. Follow [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) to create a personal access token.
+
+2. When selecting the choice of PAT, choose `Personal access token (classic)`.
+
+3. Save the generated PAT for use a bit later in the lab.
+
+## Task 6: Launch an OCI Compute Instance (optional, but recommended)
 To simplify the remaining steps in the workshop, we recommend using an OCI comupute instance. If you'd prefer to run the tasks locally on your laptop, you will need:
 * Python 3.8 or newer
 * Node.js 18 or newer
