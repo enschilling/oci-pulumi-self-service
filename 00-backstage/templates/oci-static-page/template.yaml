@@ -122,7 +122,7 @@ spec:
       deployment: false
       name: ${{ parameters.name }}
       repoUrl: "https://github.com/${{ (parameters.repoUrl | parseRepoUrl)['owner'] }}/${{ (parameters.repoUrl | parseRepoUrl)['repo'] }}"
-      repoProjectPath: ${{parameters.name }}
+      repoProjectPath: 
       organization: ${{parameters.organization}}
       outputs:
       - bucketURL
@@ -136,7 +136,7 @@ spec:
       allowedHosts: ["github.com"]
       repoVisibility: public
       description: "This repository contains the infrastructure code for the ${{ parameters.name }} component"
-      repoUrl: ${{ parameters.repoUrl }}
+      repoUrl: ${{ parameters.repoUrl }}/${{parameters.name }}
       defaultBranch: main
       requiredApprovingReviewCount: 0
       protectDefaultBranch: false
