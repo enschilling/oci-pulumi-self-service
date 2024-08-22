@@ -100,7 +100,7 @@ spec:
       values:
         name: ${{parameters.name}}
         description: ${{ parameters.description }}
-        destination: ${{ parameters.repoUrl | parseRepoUrl }}/${{parameters.name }}
+        destination: ${{ parameters.repoUrl | parseRepoUrl }}
         organization: ${{parameters.organization}}
         stack: ${{ parameters.stack }}
         owner: ${{ parameters.owner }}
@@ -122,7 +122,7 @@ spec:
       deployment: false
       name: ${{ parameters.name }}
       repoUrl: "https://github.com/${{ (parameters.repoUrl | parseRepoUrl)['owner'] }}/${{ (parameters.repoUrl | parseRepoUrl)['repo'] }}"
-      repoProjectPath: .
+      repoProjectPath: ${{parameters.name }}
       organization: ${{parameters.organization}}
       outputs:
       - bucketURL
