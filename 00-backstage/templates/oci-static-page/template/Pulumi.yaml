@@ -2,6 +2,9 @@ name: ${{ values.name }}
 runtime: yaml
 description: A minimal Pulumi YAML program
 
+environment:
+  - ${{values.esc}}
+
 resources:
   bucket:
     type: oci:ObjectStorage:Bucket
