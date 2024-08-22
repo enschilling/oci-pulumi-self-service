@@ -100,7 +100,7 @@ spec:
       values:
         name: ${{parameters.name}}
         description: ${{ parameters.description }}
-        destination: ${{ parameters.repoUrl | parseRepoUrl }}
+        destination: ${{ parameters.repoUrl | parseRepoUrl }}/${{parameters.name }}
         organization: ${{parameters.organization}}
         stack: ${{ parameters.stack }}
         owner: ${{ parameters.owner }}
