@@ -74,6 +74,7 @@ auth:
     guest:
       dangerouslyAllowOutsideDevelopment: true
 scaffolder:
+  defaultCommitMessage: "OCI + Pulumi + Backstage = self service"
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 catalog:

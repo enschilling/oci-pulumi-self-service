@@ -136,7 +136,7 @@ spec:
       allowedHosts: ["github.com"]
       repoVisibility: public
       description: "This repository contains the infrastructure code for the ${{ parameters.name }} component"
-      repoUrl: ${{ parameters.repoUrl }}/${{parameters.name }}
+      repoUrl: ${{ parameters.repoUrl }}
       defaultBranch: main
       requiredApprovingReviewCount: 0
       protectDefaultBranch: false
