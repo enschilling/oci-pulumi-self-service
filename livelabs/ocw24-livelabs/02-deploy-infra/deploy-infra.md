@@ -19,7 +19,7 @@ Estimated time: 20 minutes
     ```bash
     <copy>
     git clone https://github.com/enschilling/oci-pulumi-self-service.git
-    cd oci-pulumi-self-service/livelabs/ocw24-livelabs/99-resources/00-backstage/
+    cd oci-pulumi-self-service/00-backstage
     </copy>
     ```
 
@@ -56,7 +56,7 @@ Estimated time: 20 minutes
 
     ```bash
     <copy>
-    python3.10 -m venv venv
+    python3 -m venv venv
     source venv/bin/activate
     <copy>
     ```
@@ -65,7 +65,7 @@ Estimated time: 20 minutes
 
 2. Install the Pulumi OCI provider
 
-    ```bash
+    ```
     <copy>
     pip install pulumi_oci
     </copy>
@@ -140,6 +140,7 @@ Estimated time: 20 minutes
     tenancy_ocid      ocid1.tenancy.oc1.aa999999999999999999999999999999999999999999999b
     username          el123456g@domain.com
     oci:region        us-ashburn-1
+    ```
 
 3. Bring the Pulumi project online.
 
