@@ -155,13 +155,20 @@ To simplify the remaining steps in the workshop, we recommend using an OCI comup
     sudo apt install -y nodejs
     sudo apt install gcc g++ make -y
     sudo npm install --global yarn
-    exec -l $SHELL
     </copy>
     ```
 
     >Note: You can copy the entire block of commands and paste it in your terminal. You might be prompted a few times to press enter to accept the defaults, or type `Y` to agree.
 
-4. Configure the OCI CLI.
+4. Restart the shell session.
+
+    ```bash
+    <copy>
+    exec $SHELL
+    </copy>
+    ```
+
+5. Configure the OCI CLI.
 
     ```bash
     <copy>oci setup config</copy>
@@ -197,7 +204,7 @@ To simplify the remaining steps in the workshop, we recommend using an OCI comup
         https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2
     ```
 
-5. After the CLI setup is complete, you will need to add the API key to your OCI user profile. [Click here](https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2) to read the instructions.
+6. After the CLI setup is complete, you will need to add the API key to your OCI user profile. [Click here](https://docs.cloud.oracle.com/Content/API/Concepts/apisigningkey.htm#How2) to read the instructions.
 
     ```bash
     <copy>
@@ -205,7 +212,7 @@ To simplify the remaining steps in the workshop, we recommend using an OCI comup
     </copy>
     ```
 
-6. Test the CLI.
+7. Test the CLI.
 
     ```bash
     <copy>

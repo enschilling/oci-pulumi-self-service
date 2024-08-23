@@ -12,7 +12,7 @@ Estimated time: 20 minutes
 * Access the Backstage portal
 * Create a new environment in Pulumi
 
-## Task 1: Download the code and confnigure Pulumi
+## Task 1: Download the code and configure Pulumi
 
 1. Within your lab environment (Compute instance or local machine), clone the source code repository.
 
@@ -66,9 +66,7 @@ Estimated time: 20 minutes
 2. Install the Pulumi OCI provider
 
     ```
-    <copy>
-    pip install pulumi_oci
-    </copy>
+    <copy>pip install pulumi_oci</copy>
     ```
 
 3. Create your first Pulumi stack.
@@ -141,6 +139,7 @@ Estimated time: 20 minutes
     username          el123456g@domain.com
     oci:region        us-ashburn-1
     ```
+    
 
 3. Bring the Pulumi project online.
 
