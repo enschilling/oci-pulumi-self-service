@@ -1,26 +1,50 @@
-# Deploying your first application to OKE
+# Create your first Backstage infrastructure template
 
 ## Introduction
 
-In this lab you'll deploy a few different resources and get to know how Kubernetes operates on OCI. If you're already deployed Kubernetes yourself in another environment, you'll find it functions pretty much the same...only without all the effort required to actually deploy and manage the cluster.
+In this lab you'll deploy your first template to Backstage. The provided template will be used to create a simple static web page using OCI Object Storage that serves an index.html file. The index.html file will be populated with the input provided by the userin the Backstage app.
 
-Estimated time: 30 minutes
+Estimated time: 20 minutes
 
 ### Objectives
 
-* Deploy a sample app and expose it to the internet using an OCI Load Balancer.
-* Deploy an NGINX Ingress controller.
-* Deploy a second application and expose it to the internet via the Ingress controller.
+* Create a new backstage template
+* Use the template to provision a static web page in OCI Object Storage
 
-## Task 1: Deploy NGINX and corresponding load balancer.
+## Task 1: Create the Backstage template.
 
-1. From Cloud Shell, run the following command:
+1. From the Backstage dashboard, click the **`[CREATE]`** button.
+
+2. You'll see there is an existing template for `Create a new OCI Static Website`.
+
+    ![View available templates](images/backstage-create-existing-templates.png)
+
+3. Click **`[Choose]`** to select this template, then fill in the fields on the subsequent screen.
+
+    * **Name** - a new, unique Pulumi stack name
+    * **Description** - A brief summary; something like, "OCI Pulumi Workshop - First Template"
+    * **Owner** - Enter your name here to indicate yourself as the owner of the project
+
+4. Click **`[NEXT]`** and fill in the Pulumi template details.
+
+    * **Organization** - Enter somethign like, "Workshop"
+    * **Pulumi ESC** - 
+
+
 
     ```
     <copy>
-    kubectl run nginx --image=nginx
+    <html>
+    <head>
+    <title>OCI + Pulumi + Backstage = Self Service Portal</title>
+    <h1>Well done - your first template deployment!</h1>
+    </head>
+    </html>
     </copy>
     ```
+
+
+
 
 2. Use `kubectl get pods` to check status of the pod creation.
 
