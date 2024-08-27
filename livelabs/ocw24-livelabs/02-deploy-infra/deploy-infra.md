@@ -58,7 +58,7 @@ Estimated time: 20 minutes
     <copy>
     python3 -m venv venv
     source venv/bin/activate
-    <copy>
+    </copy>
     ```
 
     You should now see `(venv)` at the beginning of of your terminal prompt.
@@ -139,7 +139,7 @@ Estimated time: 20 minutes
     username          el123456g@domain.com
     oci:region        us-ashburn-1
     ```
-    
+
 
 3. Bring the Pulumi project online.
 

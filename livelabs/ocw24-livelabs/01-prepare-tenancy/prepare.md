@@ -164,7 +164,7 @@ To simplify the remaining steps in the workshop, we recommend using an OCI comup
 
     ```bash
     <copy>
-    exec $SHELL
+    source ~/.profile
     </copy>
     ```
 
