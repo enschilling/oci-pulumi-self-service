@@ -103,7 +103,7 @@ Estimated time: 20 minutes
     > <create a new stack>
     ```
 
-4. Provide a name the stack and press enter.
+4. Provide a name the stack (e.g. OCW-2024) and press enter.
 
 ## Task 2: Build out your Pulumi project
 

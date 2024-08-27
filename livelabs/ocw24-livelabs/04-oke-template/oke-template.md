@@ -46,13 +46,24 @@ In this lab you will register additional templates from a Github repository, the
 
 4. Review and create!
 
-5. 
+5. The process to create a new OKE cluster and node pool can around 15 minutes. Feel free to grab a beverage and take a quick break.
+
+## Task 3: View the newly created component
+
+1. If you now view the catalog info component, you'll see a [slightly] more useful graph.
+
+  ![Component relationship map](images/component-relations.png)
+
+2. Given the addition of two entities in the first task, we can now track component ownership. As you provision additional components related to particular groups, it is easy to explore the relationships between the different entities.
+
+3. 
 
 You may now **proceed to the next lab**.
 
 ## Learn More
 
-* [OKE Virtual Nodes](https://blogs.oracle.com/cloud-infrastructure/post/oke-virtual-nodes-deliver-serverless-experience)
+* [Oracle Container Engine for Kubernetes (OKE)](https://backstage.io/docs/features/software-templates/writing-templates/#outputs)
+* [Managing stack output within Backstage templates](https://backstage.io/docs/features/software-templates/writing-templates/#outputs)
 
 
 ## Acknowledgements

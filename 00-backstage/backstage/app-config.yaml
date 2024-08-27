@@ -85,6 +85,6 @@ catalog:
     - allow: [Component, System, API, Resource, Location,Template,User,Group]
   locations:
     - type: url
-      target: https://github.com/enschilling/Pulumi-backstage-templates/blob/main/oci-static-page/template.yaml
+      target: https://github.com/enschilling/pulumi-backstage-templates/blob/main/oci-static-page/template.yaml
       rules:
       - allow: [Template]
