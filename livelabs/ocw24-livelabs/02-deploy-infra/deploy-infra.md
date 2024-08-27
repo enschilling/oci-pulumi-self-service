@@ -66,7 +66,7 @@ Estimated time: 20 minutes
 2. Install the Pulumi OCI provider
 
     ```
-    <copy>pip install pulumi_oci</copy>
+    pip install pulumi_oci
     ```
 
 3. Create your first Pulumi stack.
@@ -180,12 +180,80 @@ Estimated time: 20 minutes
 
     ![View the Backstage dashboard](images/backstage-dashboard.png)
 
+## Task 3: Create a new Pulumi Environmnet
+Pulumi environments, secrets, and configuration - or ESC for short - enables teams to centralize secrets and configuration data in a central repository. ESC is intended to provide frictionless security, improve developer efficiency, enhance compliance, and mitigate sprawl. On top of that, ESC easiliy integrates with a variety of platforms, making it a cinch to add to your IaC efforts.
+
+1. Return to the app.pulumi.com portal, making sure you're logged in, and click **Environments** on the left navigation menu.
+
+2. Click **`[Create Environment]`** and supply a name for the environment: `oci-pulumi-self-service`.
+
+    >Note: If you enter a different name for the Environment, lab 3 will not work properly.
+
+3. You will now see a new environment definition with some sample information. You can go ahead and delete everything you see there.
+
+    ![Sample environment definition](images/esc-new-environment-01.png)
+
+4. Copy and paste the following into the Environment Definition.
+
+    ```bash
+    <copy>
+    # values is a required top-level key
+    values:
+      oracle:
+        default:
+          userOcid: <you user OCID here>>
+            fingerprint: <your API key fingerprint here>>
+            tenancyOcid: <your tenancy OCID here>
+            region: <your selected region here>
+            privateKey:
+              fn::secret: "<paste API private key contents here>"
+      # Configuration nested under the "pulumiConfig" key will be available to Pulumi stacks that
+      # reference this Environment during `pulumi up/preview/refresh/destroy`
+      pulumiConfig:
+        oci:userOcid: ${oracle.default.userOcid}
+        oci:fingerprint: ${oracle.default.fingerprint}
+        oci:tenancyOcid: ${oracle.default.tenancyOcid}
+        oci:region: ${oracle.default.region}
+        oci:privateKey: ${oracle.default.privateKey}
+    </copy>
+    ```
+
+    >Note: Your pasted values should look something like this:
+
+    ```bash
+    # values is a required top-level key
+    values:
+      oracle:
+        default:
+          userOcid: ocid1.user.oc1..aaaaasldkjfasdfasdfasdfasdfa56kypvlma
+          fingerprint: 2b:2b:99:00:11:22:b2:2b:2b:88:2b:88:2n:ab:2b:99
+          tenancyOcid: ocid1.tenancy.oc1..aaaaaaaaasdfasfdasdfasdfasdfasdfasfdadsfasda
+          region: us-ashburn-1
+          privateKey:
+            fn::secret: "-----BEGIN PRIVATE KEY-----
+            blah blah blah
+            blah blah blah
+            -----END PRIVATE KEY-----"
+      # Configuration nested under the "pulumiConfig" key will be available to Pulumi stacks that
+      # reference this Environment during `pulumi up/preview/refresh/destroy`
+      pulumiConfig:
+        oci:userOcid: ${oracle.default.userOcid}
+        oci:fingerprint: ${oracle.default.fingerprint}
+        oci:tenancyOcid: ${oracle.default.tenancyOcid}
+        oci:region: ${oracle.default.region}
+        oci:privateKey: ${oracle.default.privateKey}
+    ```
+
+5. Click the **`[Save]`** button to store your environment details.  You'll notice that the contents of your private key are replaced with `cipherText:` and a hash, as the value of your secret is encrypted, then stored.
+
+6. Go ahead and return to the Backtage dashboard.
+
 You may now **proceed to the next lab**.
 
 ## Learn More
 
 * [Backstage open source project](https://backstage.io/)
-
+* [Pulumi ESC](https://www.pulumi.com/product/esc/)
 
 ## Acknowledgements
 
