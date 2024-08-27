@@ -30,12 +30,12 @@
     {
       "title": "Lab 4: Experiment with additional, more complex templates",
       "description" : "Create another Backstage template for provisioning an Oracle Container Engine for Kubernetes (OKE) cluster",
-      "filename":"../ocw24-livelabs/04-oke-template.md"
+      "filename":"../ocw24-livelabs/04-oke-template/oke-template.md"
     },
     {
-      "title": "Lab 8: Cleaning up your tenancy",
+      "title": "Lab 5: Cleaning up your tenancy",
       "description" : "Clean-up and remove all deployed resources",
-      "filename":"../ocw24-livelabs/08-cleanup/cleanup.md"
+      "filename":"../ocw24-livelabs/05-cleanup/cleanup.md"
     },
     {
       "title": "Need Help?",
