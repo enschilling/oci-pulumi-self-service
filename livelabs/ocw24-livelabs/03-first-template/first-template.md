@@ -56,10 +56,19 @@ Estimated time: 20 minutes
 
 ## Task 2: Interact with the Backstage component
 
+1. Once the build completes, you'll see a few link options to explore.
 
-## Task 3: Explore the Pulumi stack
+    ![Create complete: available links](images/component-complete-01.png)
 
+2. You can click to open the source code repo and you'll be directed to Github in a new window. You can now clone the repo and experiment with making changes to the code.
 
+    >Note: Because this was copied from a central template repo, you can perform all the experiments you want without affecting the upstream code base.
+
+3. Return to the component complete page and click to open the catalog info component. Here you'll see details about the component, including relations (we've not yet added entities, so this is kind of boring).
+
+4. Note across the top menu you have things like CI/CD, API, Dependencies, and more. These are all features you may choose to leverage during implementation.
+
+5. Click the **PULUMI** menu item to see activities details. Clicking the link in the **Type** colum will take you to app.pulumi.com where you can view complete details about the stack and corresponding infrastructure.
 
 You may now **proceed to the next lab**.
 
