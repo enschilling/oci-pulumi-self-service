@@ -180,7 +180,7 @@ Estimated time: 20 minutes
 
     ![View the Backstage dashboard](images/backstage-dashboard.png)
 
-## Task 3: Create a new Pulumi Environmnet
+## Task 3: Create a new Pulumi Environment
 Pulumi environments, secrets, and configuration - or ESC for short - enables teams to centralize secrets and configuration data in a central repository. ESC is intended to provide frictionless security, improve developer efficiency, enhance compliance, and mitigate sprawl. On top of that, ESC easiliy integrates with a variety of platforms, making it a cinch to add to your IaC efforts.
 
 1. Return to the app.pulumi.com portal, making sure you're logged in, and click **Environments** on the left navigation menu.
@@ -246,7 +246,7 @@ Pulumi environments, secrets, and configuration - or ESC for short - enables tea
 
 5. Click the **`[Save]`** button to store your environment details.  You'll notice that the contents of your private key are replaced with `cipherText:` and a hash, as the value of your secret is encrypted, then stored.
 
-6. Go ahead and return to the Backtage dashboard.
+6. Go ahead and return to the Backstage dashboard.
 
 You may now **proceed to the next lab**.
 

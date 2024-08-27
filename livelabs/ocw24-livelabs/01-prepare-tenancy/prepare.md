@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this workshop you'll build out a working environment that you can use to deploy and manage the Pulumi and Backstage envrironment. You'll need to be logged in your OCI tenancy (Free Trial recommended). You'll also need an SSH client so you can connect to an OCI Compute Instance.
+In this workshop you'll build out a working environment that you can use to deploy and manage the Pulumi and Backstage components. You'll need to be logged in your OCI tenancy (Free Trial recommended). You'll also need an SSH client so you can connect to an OCI Compute Instance.
 
 Estimated time: 20 minutes
 
@@ -104,6 +104,10 @@ Estimated time: 20 minutes
 
 2. When selecting the choice of PAT, choose `Personal access token (classic)`.
 
+3. Under **Select scopes**, you just need **Repo**
+
+    ![Select scopes - repo](images/gh-select-scope.png)
+
 3. Save the generated PAT for use a bit later in the lab.
 
 ## Task 6: Launch an OCI Compute Instance (optional, but recommended)
@@ -167,6 +171,8 @@ To simplify the remaining steps in the workshop, we recommend using an OCI comup
     source ~/.profile
     </copy>
     ```
+
+    >Note: The best way to check permissions is to run `docker ps` - if you get an error, you'll need to disconnect from the server, then reconnect (to fully recycle your user session)
 
 5. Configure the OCI CLI.
 
